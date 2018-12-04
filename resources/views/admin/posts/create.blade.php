@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(count($errors) > 0)
-        <ul class="list-group">
-            @foreach($errors->all() as $error)
-                <li class="list-group-item text-danger">
-                    {{ $error }}
-                </li>
-                @endforeach
-        </ul>
-        @endif
+    @include('admin.includes.errors')
     <div class="panel panel-default">
         <div class="panel-heading">
             Create new post
@@ -26,8 +18,16 @@
                     <input type="file" name="featured" class="form-control" id="featured">
                 </div>
                 <div class="form-group">
+                    <label for="category">Select a Category image</label>
+                   <select name="category_id" id="category" class="form-control">
+                       @foreach($categories as $category)
+                           <option value="{{ $category->id }}">{{ $category->name }}</option>
+                           @endforeach
+                   </select>
+                </div>
+                <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea cols="5" rows="5" name="content" class="form-control" id="content"></textarea>
+                    <textarea cols="5" rows="5" name="content_post" class="form-control" id="content"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="text-center">

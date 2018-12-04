@@ -60,5 +60,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
         'uses' => 'CategoriesController@destroy',
         'as' => 'category.delete'
     ]);
+
+    Route::post('/category/update/{id}', [
+        'uses' => 'CategoriesController@update',
+        'as' => 'category.update'
+    ]);
 });
 
