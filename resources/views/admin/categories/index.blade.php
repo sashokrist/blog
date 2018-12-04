@@ -2,21 +2,37 @@
 
 @section('content')
         <h2>Categories</h2><hr>
-        @foreach($categories as $category)
-            <div class="row">
-            <div class="col-md-4">
-                {{ $category->name }}
+        <div class="row">
+            <div class="col-md-2">
+                Name
             </div>
             <div class="col-md-2">
-                <a href="{{ route('category.delete', ['id' => $category->id]) }}" class="btn btn-danger">
-                    <span><i class="fas fa-trash-alt"></i></span>
-                </a>
+                Delete
             </div><br>
             <div class="col-md-2">
-                <a href="{{ route('category.edit', ['id' => $category->id]) }}" class="btn btn-info">
-                    <span><i class="fas fa-pencil-alt"></i></span>
-                </a>
+                Edit
             </div>
-    </div><hr>
-        @endforeach
+        </div><hr style="border-style: inset; border-width: 3px;">
+        @if($categories->count() > 0)
+            @foreach($categories as $category)
+                <div class="row">
+                    <div class="col-md-2">
+                        {{ $category->name }}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{ route('category.delete', ['id' => $category->id]) }}" class="btn btn-danger">
+                            <span><i class="fas fa-trash-alt"></i></span>
+                        </a>
+                    </div><br>
+                    <div class="col-md-2">
+                        <a href="{{ route('category.edit', ['id' => $category->id]) }}" class="btn btn-info">
+                            <span><i class="fas fa-pencil-alt"></i></span>
+                        </a>
+                    </div>
+                </div><hr>
+            @endforeach
+            @else
+            <span>No Categories created</span>
+            @endif
+
     @endsection
