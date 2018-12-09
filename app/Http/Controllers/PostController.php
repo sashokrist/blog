@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Session;
 
@@ -22,7 +23,8 @@ class PostController extends Controller
             Session::flash('info', 'You must create a category before create a new post');
             return redirect()->back();
         }
-        return view('admin.posts.create')->with('categories', $categories);
+        return view('admin.posts.create')->with('categories', $categories)
+            ->with('tags', Tag::all());
     }
 
     public function store(Request $request)
@@ -43,8 +45,12 @@ class PostController extends Controller
            'content_post' => $request->content_post,
            'featured' => 'uploads/posts/'.$featured_new_name,
            'category_id' => $request->category_id,
-           'slug' => str_slug($request->title)
+           'slug' => str_slug($request->title),
+           'tags' => 'required'
        ]);
+
+       $post->tags()->attach($request->tags);
+
        Session::flash('success', 'Post was created');
        return redirect()->route('posts');
 
@@ -59,7 +65,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all());
+        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all())
+            ->with('tags', Tag::all());
     }
 
     public function update(Request $request, $id)
@@ -82,6 +89,9 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
 
         $post->save();
+
+        $post->tags()->sync($request->tags);
+
         Session::flash('success', 'Post was update');
         return redirect()->route('posts');
 

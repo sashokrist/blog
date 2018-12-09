@@ -26,6 +26,20 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="tags">Select tags</label>
+                    @foreach($tags as $tag)
+                        <div class="custom-checkbox">
+                            <label><input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                            @foreach($post->tags as $t)
+                                @if($tag->id == $t->id)
+                                        checked
+                                        @endif
+                                @endforeach
+                                >{{ $tag->tag }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="form-group">
                     <label for="content">Content</label>
                     <textarea cols="5" rows="5" name="content_post" class="form-control" id="content">
                         {{ $post->content_post }}

@@ -21,7 +21,7 @@
         @foreach($posts as $post)
             <div class="row">
                 <div class="col-md-2">
-                    <img src="{{ $post->featured }}" width="90px" height="50px">
+                    <img src="{{ $post->featured }}" style="margin-bottom: 5px;" width="90px" height="50px">
                 </div>
                 <div class="col-md-2">
                     {{ $post->title }}
