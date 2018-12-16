@@ -17,7 +17,7 @@
             @foreach($categories as $category)
                 <div class="row">
                     <div class="col-md-2">
-                        {{ $category->name }}
+                       <a href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->name }}</a>
                     </div>
                     <div class="col-md-2">
                         <a href="{{ route('category.delete', ['id' => $category->id]) }}" class="btn btn-danger">

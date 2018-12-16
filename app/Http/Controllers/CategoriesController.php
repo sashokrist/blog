@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Session;
 use App\Category;
 use Illuminate\Http\Request;
@@ -35,7 +36,10 @@ class CategoriesController extends Controller
 
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        $posts = Post::where('category_id', $category);
+
+        return view('admin.categories.show')->with('categories', $category)->with('posts', $posts);
     }
 
 
@@ -59,6 +63,10 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
+        /*foreach ($category->posts as $post){
+            $post->delete();
+        }*/
         $category->delete();
         Session::flash('success', 'You deleted new category');
         return redirect()->route('categories');

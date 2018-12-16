@@ -51,6 +51,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
         'as' => 'posts'
     ]);
 
+    Route::get('/post/show/{id}', [
+        'uses' => 'PostController@show',
+        'as' => 'post.show'
+    ]);
+
     Route::get('/posts/trashed', [
         'uses' => 'PostController@trashed',
         'as' => 'posts.trashed'
@@ -84,6 +89,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('/categories', [
         'uses' => 'CategoriesController@index',
         'as' => 'categories'
+    ]);
+
+    Route::get('/category/show/{id}', [
+        'uses' => 'CategoriesController@show',
+        'as' => 'category.show'
     ]);
 
     Route::post('/category/store', [

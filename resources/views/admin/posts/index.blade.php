@@ -24,7 +24,7 @@
                     <img src="{{ $post->featured }}" style="margin-bottom: 5px;" width="90px" height="50px">
                 </div>
                 <div class="col-md-2">
-                    {{ $post->title }}
+                   <a href="{{ route('post.show', ['id' =>$post->id]) }}">{{ $post->title }}</a>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ route('post.edit', ['id' =>$post->id]) }}" class="btn btn-info"><span><i class="fas fa-pencil-alt"></i></span></a>
